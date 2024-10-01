@@ -30,7 +30,7 @@ public class frontPage extends Frame implements ActionListener {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					homePage homeObj = new homePage();
-					homeObj.VotingAppLogin();
+//					homeObj.VotingAppLogin();
 					
 				}
 			});
