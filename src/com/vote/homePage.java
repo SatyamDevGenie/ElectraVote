@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 
 public class homePage extends Frame implements ActionListener {
     Label lblCandidateList;
+    CheckboxGroup candidateGroup; // Group for checkboxes
     Checkbox choice1, choice2, choice3;
     Button submitButton;
 
@@ -27,19 +28,22 @@ public class homePage extends Frame implements ActionListener {
         gbc.gridwidth = 2; // Span 2 columns
         add(lblCandidateList, gbc);
 
+        // Create a CheckboxGroup for single selection
+        candidateGroup = new CheckboxGroup();
+
         // Candidate Checkboxes
-        choice1 = new Checkbox("Candidate 1");
+        choice1 = new Checkbox("Candidate 1", candidateGroup, false);
         gbc.gridwidth = 1; // Reset to 1 column
         gbc.gridx = 0; // Column 0
         gbc.gridy = 1; // Row 1
         add(choice1, gbc);
 
-        choice2 = new Checkbox("Candidate 2");
+        choice2 = new Checkbox("Candidate 2", candidateGroup, false);
         gbc.gridx = 0; // Column 0
         gbc.gridy = 2; // Row 2
         add(choice2, gbc);
 
-        choice3 = new Checkbox("Candidate 3");
+        choice3 = new Checkbox("Candidate 3", candidateGroup, false);
         gbc.gridx = 0; // Column 0
         gbc.gridy = 3; // Row 3
         add(choice3, gbc);
@@ -68,13 +72,12 @@ public class homePage extends Frame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Handle button click action
         if (e.getSource() == submitButton) {
-            StringBuilder selectedCandidates = new StringBuilder("You voted for: ");
-            if (choice1.getState()) selectedCandidates.append("Candidate 1 ");
-            if (choice2.getState()) selectedCandidates.append("Candidate 2 ");
-            if (choice3.getState()) selectedCandidates.append("Candidate 3 ");
-
-            System.out.println(selectedCandidates.toString());
-            // You can also add logic to handle the voting process
+            Checkbox selectedCandidate = candidateGroup.getSelectedCheckbox();
+            if (selectedCandidate != null) {
+                System.out.println("You voted for: " + selectedCandidate.getLabel());
+            } else {
+                System.out.println("No candidate selected.");
+            }
         }
     }
 
