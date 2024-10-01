@@ -58,6 +58,9 @@ public class homePage extends Frame implements ActionListener {
         // Action listener for button
         submitButton.addActionListener(this);
 
+        // Center the frame on the screen
+        centerFrame();
+
         // Window listener for closing the window
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
@@ -66,6 +69,15 @@ public class homePage extends Frame implements ActionListener {
         });
 
         setVisible(true);
+    }
+
+    // Method to center the frame
+    private void centerFrame() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+        setLocation(x, y);
     }
 
     @Override
