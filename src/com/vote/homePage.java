@@ -8,69 +8,58 @@ import java.awt.event.WindowEvent;
 
 public class homePage extends Frame implements ActionListener {
     Label lblCandidateList;
-    CheckboxGroup candidateGroup; // Group for checkboxes
+    CheckboxGroup candidateGroup;
     Checkbox choice1, choice2, choice3;
     Button submitButton;
 
     public homePage() {
         // Frame properties
         setTitle("Voting Application");
-        setSize(400, 250);
+        setSize(450, 450);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Padding around components
+        gbc.insets = new Insets(15, 15, 15, 15); // Padding around components
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Set background color
-        setBackground(new Color(240, 240, 240));
+        setBackground(new Color(245, 245, 245));
 
-        // Candidate List Label
-        lblCandidateList = new Label("Candidate List:");
-        lblCandidateList.setFont(new Font("Arial", Font.BOLD, 16)); // Set font
-        lblCandidateList.setForeground(new Color(50, 50, 50)); // Set text color
-        gbc.gridx = 0; // Column 0
-        gbc.gridy = 0; // Row 0
-        gbc.gridwidth = 2; // Span 2 columns
+        // Candidate List Label with enhanced styling
+        lblCandidateList = new Label("Please Select Your Candidate:");
+        lblCandidateList.setFont(new Font("Helvetica", Font.BOLD, 18)); // Modern font
+        lblCandidateList.setForeground(new Color(35, 35, 35)); // Darker shade for text
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
         add(lblCandidateList, gbc);
 
         // Create a CheckboxGroup for single selection
         candidateGroup = new CheckboxGroup();
 
-        // Candidate Checkboxes with styling
-        choice1 = new Checkbox("Candidate 1", candidateGroup, false);
-        choice1.setFont(new Font("Arial", Font.PLAIN, 14));
-        choice1.setForeground(new Color(70, 70, 70));
-        gbc.gridwidth = 1; // Reset to 1 column
-        gbc.gridx = 0; // Column 0
-        gbc.gridy = 1; // Row 1
-        add(choice1, gbc);
+        // Candidate Checkboxes with enhanced styling
+        choice1 = new Checkbox(" Candidate 1 - John Doe", candidateGroup, false);
+        styleCheckbox(choice1, gbc, 1);
+        
+        choice2 = new Checkbox(" Candidate 2 - Jane Smith", candidateGroup, false);
+        styleCheckbox(choice2, gbc, 2);
+        
+        choice3 = new Checkbox(" Candidate 3 - Alex Johnson", candidateGroup, false);
+        styleCheckbox(choice3, gbc, 3);
 
-        choice2 = new Checkbox("Candidate 2", candidateGroup, false);
-        choice2.setFont(new Font("Arial", Font.PLAIN, 14));
-        choice2.setForeground(new Color(70, 70, 70));
-        gbc.gridx = 0; // Column 0
-        gbc.gridy = 2; // Row 2
-        add(choice2, gbc);
-
-        choice3 = new Checkbox("Candidate 3", candidateGroup, false);
-        choice3.setFont(new Font("Arial", Font.PLAIN, 14));
-        choice3.setForeground(new Color(70, 70, 70));
-        gbc.gridx = 0; // Column 0
-        gbc.gridy = 3; // Row 3
-        add(choice3, gbc);
-
-        // Submit Button with custom styling
-        submitButton = new Button("Submit Your Vote");
-        submitButton.setFont(new Font("Arial", Font.BOLD, 14));
-        submitButton.setBackground(new Color(50, 150, 50)); // Green background
+        // Submit Button with custom styling and hover effect
+        submitButton = new Button("Submit Vote");
+        submitButton.setFont(new Font("Helvetica", Font.BOLD, 16));
+        submitButton.setBackground(new Color(0, 123, 255)); // Blue background
         submitButton.setForeground(Color.WHITE); // White text
-        gbc.gridx = 0; // Column 0
-        gbc.gridy = 4; // Row 4
-        gbc.gridwidth = 2; // Span 2 columns
-        add(submitButton, gbc);
-
-        // Action listener for button
+        submitButton.setPreferredSize(new Dimension(160, 40)); // Button size
         submitButton.addActionListener(this);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
+        add(submitButton, gbc);
 
         // Center the frame on the screen
         centerFrame();
@@ -83,6 +72,17 @@ public class homePage extends Frame implements ActionListener {
         });
 
         setVisible(true);
+    }
+
+    // Method to style checkbox with consistent format
+    private void styleCheckbox(Checkbox checkbox, GridBagConstraints gbc, int row) {
+        checkbox.setFont(new Font("Helvetica", Font.PLAIN, 14));
+        checkbox.setForeground(new Color(60, 60, 60));
+        gbc.gridx = 0;
+        gbc.gridy = row;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        add(checkbox, gbc);
     }
 
     // Method to center the frame

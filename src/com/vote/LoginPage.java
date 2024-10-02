@@ -10,7 +10,7 @@ public class LoginPage extends Frame implements ActionListener {
     void VotingAppLogin() {
         // Frame properties
         setTitle("Voting App Login");
-        setSize(400, 250);
+        setSize(400, 400);
         setLayout(new GridBagLayout()); // Use GridBagLayout to center components
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Padding around components
@@ -20,37 +20,51 @@ public class LoginPage extends Frame implements ActionListener {
         // Set background color for the Frame
         setBackground(new Color(240, 240, 240)); // Light gray background
 
+        // Heading Label
+        Label headingLabel = new Label("Voter's Login", Label.CENTER);
+        headingLabel.setFont(new Font("Arial", Font.BOLD, 20)); // Set font size and style
+        headingLabel.setForeground(new Color(40, 40, 40)); // Dark font color
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2; // Span across two columns
+        add(headingLabel, gbc);
+
         // Username Label and TextField
         Label usernameLabel = new Label("Username:");
         usernameLabel.setForeground(new Color(40, 40, 40)); // Dark font color
-        gbc.gridx = 0; // Column 0
-        gbc.gridy = 0; // Row 0
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1; // Reset to single column
         add(usernameLabel, gbc);
 
         usernameField = new TextField(20);
-        gbc.gridx = 1; // Column 1
-        gbc.gridy = 0; // Row 0
+        gbc.gridx = 1;
+        gbc.gridy = 1;
         add(usernameField, gbc);
 
         // Password Label and TextField
         Label passwordLabel = new Label("Password:");
         passwordLabel.setForeground(new Color(40, 40, 40)); // Dark font color
-        gbc.gridx = 0; // Column 0
-        gbc.gridy = 1; // Row 1
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         add(passwordLabel, gbc);
 
         passwordField = new TextField(20);
         passwordField.setEchoChar('*');
-        gbc.gridx = 1; // Column 1
-        gbc.gridy = 1; // Row 1
+        gbc.gridx = 1;
+        gbc.gridy = 2;
         add(passwordField, gbc);
 
         // Login Button
         loginButton = new Button("Login");
         loginButton.setBackground(new Color(70, 130, 180)); // Steel Blue background
         loginButton.setForeground(Color.WHITE); // White text for the button
-        gbc.gridx = 1; // Column 1
-        gbc.gridy = 2; // Row 2
+        loginButton.setPreferredSize(new Dimension(130, 30)); // Width = 150, Height = 50
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER; // anchor at center
+        gbc.fill = GridBagConstraints.NONE;     // do not resize the button
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         add(loginButton, gbc);
 
         loginButton.addActionListener(new ActionListener() {
