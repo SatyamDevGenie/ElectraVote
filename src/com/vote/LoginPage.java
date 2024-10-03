@@ -93,6 +93,16 @@ public class LoginPage extends Frame implements ActionListener {
                 // usernameField.getText();
             }
         });
+        
+        registerButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				registerPage regObj = new registerPage();
+			}
+        	
+        });
 
         // Window closing event
         addWindowListener(new WindowAdapter() {

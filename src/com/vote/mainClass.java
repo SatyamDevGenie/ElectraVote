@@ -6,6 +6,9 @@ public class mainClass {
 		// TODO Auto-generated method stub
 		LoginPage obj1 = new LoginPage();
 		obj1.VotingAppLogin();
+		
+		registerPage obj2 = new registerPage();
+		obj2.VotingAppRegister();
 	}
 
 }
