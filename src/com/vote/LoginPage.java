@@ -71,13 +71,13 @@ public class LoginPage extends Frame implements ActionListener {
         registerButton = new Button("Register");
         registerButton.setBackground(new Color(70, 130, 180)); // Steel Blue background
         registerButton.setForeground(Color.WHITE); // White text for the button
-        registerButton.setPreferredSize(new Dimension(130, 30)); // Width = 150, Height = 50
+       registerButton.setPreferredSize(new Dimension(130, 30)); // Width = 150, Height = 50
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER; // anchor at center
         gbc.fill = GridBagConstraints.NONE;     // do not resize the button
         gbc.gridx = 0;
         gbc.gridy = 4;
-        add(loginButton, gbc);
+        add(registerButton, gbc);
 
         loginButton.addActionListener(new ActionListener() {
             @Override
