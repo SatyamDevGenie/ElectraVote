@@ -125,6 +125,36 @@ public class registerPage extends Frame implements ActionListener {
 
                 // Registration logic goes here (e.g., validation, database insertion)
                 System.out.println("User Registered: " + name + ", Gender: " + gender + ", Age: " + age);
+                
+                dispose();
+                
+                Dialog dialog = new Dialog(registerPage.this, "Candidate ID", true);
+                dialog.setSize(300, 150);
+                dialog.setLayout(new FlowLayout());
+
+                // Add a label to the dialog
+                Label lblMessage = new Label("Candidate User Id is :- "+ candidateID);
+                dialog.add(lblMessage);
+
+                // Add an OK button to close the dialog
+                Button btnOK = new Button("OK");
+                btnOK.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        dialog.setVisible(false); // Hide the dialog on OK button click
+                        
+                        //opens Login Page
+                        LoginPage obj = new LoginPage();
+                        obj.VotingAppLogin();
+                    }
+                });
+                dialog.add(btnOK);
+
+                // Make the dialog visible
+                dialog.setVisible(true);
+                
+                
+                
+                
             }
         });
 
