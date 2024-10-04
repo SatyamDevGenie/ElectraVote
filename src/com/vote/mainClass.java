@@ -7,8 +7,8 @@ public class mainClass {
 		LoginPage obj1 = new LoginPage();
 		obj1.VotingAppLogin();
 		
-		registerPage obj2 = new registerPage();
-		obj2.VotingAppRegister();
+//		registerPage obj2 = new registerPage();
+//		obj2.VotingAppRegister();
 	}
 
 }

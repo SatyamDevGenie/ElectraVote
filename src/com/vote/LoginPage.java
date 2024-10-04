@@ -100,6 +100,7 @@ public class LoginPage extends Frame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				registerPage regObj = new registerPage();
+				regObj.VotingAppRegister();
 			}
         	
         });

@@ -2,6 +2,7 @@ package com.vote;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.UUID;
 
 public class registerPage extends Frame implements ActionListener {
     TextField nameField, ageField, passwordField;
@@ -108,10 +109,17 @@ public class registerPage extends Frame implements ActionListener {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
+            	
                 String name = nameField.getText();
                 String gender = genderChoice.getSelectedItem();
-                String age = ageField.getText();
+                int age = Integer.parseInt(ageField.getText());
                 String password = passwordField.getText();
+                int length = 10;                
+                String candidateID =  generateUUIDWithLength(10).toUpperCase();
+                System.out.println("UUID String: " + candidateID);
+                
+                DatabaseOperation.insertData(name, age, candidateID, gender, password);
 
                 // Registration logic goes here (e.g., validation, database insertion)
                 System.out.println("User Registered: " + name + ", Gender: " + gender + ", Age: " + age);
@@ -137,6 +145,13 @@ public class registerPage extends Frame implements ActionListener {
         });
 
         setVisible(true);
+    }
+    public static String generateUUIDWithLength(int length) {
+        // Generate a UUID and remove hyphens
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+
+        // Return the substring of the desired length
+        return uuid.length() > length ? uuid.substring(0, length) : uuid;
     }
 
     public static void main(String[] args) {

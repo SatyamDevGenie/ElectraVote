@@ -29,11 +29,11 @@ public class DatabaseOperation {
 	// insert data in table 
 	//method name ( values )
 	
-	public static void insertData(String name, int age, int voterID, String gender, String password ) {
+	public static void insertData(String name, int age, String voterID, String gender, String password ) {
 		
 		 try {
 	            // Assuming the table has columns: id (auto-incremented), voterName, voterAge, voterAddress
-	            String sql = "INSERT INTO Voters (name, age, gender, password, voterID) VALUES (?, ?, ?, ?, >)";
+	            String sql = "INSERT INTO Voters (name, age, gender, password, voterID) VALUES (?, ?, ?, ?, ?)";
 	            pstmt = con.prepareStatement(sql);
 
 	            // Set values for the placeholders
@@ -41,7 +41,7 @@ public class DatabaseOperation {
 	            pstmt.setInt(2, age);
 	            pstmt.setString(3, password);
 	            pstmt.setString(4, gender);
-	            pstmt.setInt(5, voterID);
+	            pstmt.setString(5, voterID);
 
 	            // Execute the insert command
 	            int rowsAffected = pstmt.executeUpdate();
