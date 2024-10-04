@@ -3,6 +3,7 @@ package com.vote;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.UUID;
+import java.lang.*;
 
 public class registerPage extends Frame implements ActionListener {
     TextField nameField, ageField, passwordField;
@@ -119,7 +120,8 @@ public class registerPage extends Frame implements ActionListener {
                 String candidateID =  generateUUIDWithLength(10).toUpperCase();
                 System.out.println("UUID String: " + candidateID);
                 
-                DatabaseOperation.insertData(name, age, candidateID, gender, password);
+                DatabaseOperation.loadJDBCDriverAndCreateConnection();
+                DatabaseOperation.insertData(candidateID, name, age, gender, password);
 
                 // Registration logic goes here (e.g., validation, database insertion)
                 System.out.println("User Registered: " + name + ", Gender: " + gender + ", Age: " + age);
