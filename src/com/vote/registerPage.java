@@ -129,28 +129,48 @@ public class registerPage extends Frame implements ActionListener {
                 dispose();
                 
                 Dialog dialog = new Dialog(registerPage.this, "Candidate ID", true);
-                dialog.setSize(300, 150);
-                dialog.setLayout(new FlowLayout());
+                dialog.setSize(400, 200); // Adjust the size for better visibility
+                dialog.setLayout(new BorderLayout()); // Use BorderLayout for better control over placement
 
-                // Add a label to the dialog
-                Label lblMessage = new Label("Candidate User Id is :- "+ candidateID);
-                dialog.add(lblMessage);
+                // Create a panel for the label and center it with padding at the top
+                Panel messagePanel = new Panel(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.insets = new Insets(20, 0, 0, 0); // Add 20px padding to the top
 
-                // Add an OK button to close the dialog
+                Label lblMessage = new Label("Candidate User ID is: " + candidateID);
+                lblMessage.setFont(new Font("Arial", Font.PLAIN, 14)); // Use a custom font for better appearance
+                messagePanel.add(lblMessage, gbc);
+
+                // Add some padding around the panel
+                messagePanel.setPreferredSize(new Dimension(350, 100)); 
+
+                // Add a panel for the button and center it
+                Panel buttonPanel = new Panel();
+                buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
                 Button btnOK = new Button("OK");
+                btnOK.setPreferredSize(new Dimension(80, 30)); // Adjust button size for better visibility
                 btnOK.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         dialog.setVisible(false); // Hide the dialog on OK button click
-                        
-                        //opens Login Page
+
+                        // Opens Login Page
                         LoginPage obj = new LoginPage();
                         obj.VotingAppLogin();
                     }
                 });
-                dialog.add(btnOK);
+                buttonPanel.add(btnOK);
 
-                // Make the dialog visible
+                // Add panels to the dialog
+                dialog.add(messagePanel, BorderLayout.CENTER);
+                dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+                // Set dialog to be modal and centered on the screen
+                dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
+
+
                 
                 
                 
