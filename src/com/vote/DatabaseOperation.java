@@ -38,12 +38,49 @@ public class DatabaseOperation {
 	// insert data in table
 	// method name ( values )
 
-	public static void insertData(String candidateID, String name, int age, String gender, String password) {
+	public static void registerVoters(String voterID, String name, int age, String gender, String password,
+			int aadharCard) {
 
 		try {
 			// Assuming the table has columns: id (auto-incremented), voterName, voterAge,
 			// voterAddress
-			String sql = "INSERT INTO Candidates (candidateID, name, age, gender, password) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Voters (voterID, name, age, gender, password, aadharCard) VALUES (?, ?, ?, ?, ?, ?)";
+			pstmt = con.prepareStatement(sql);
+
+			// Set values for the placeholders
+			pstmt.setString(1, voterID);
+			pstmt.setString(2, name);
+			pstmt.setInt(3, age);
+			pstmt.setString(4, gender);
+			pstmt.setString(5, password);
+			pstmt.setInt(6, aadharCard);
+
+			// Execute the insert command
+			int rowsAffected = pstmt.executeUpdate();
+			if (rowsAffected > 0) {
+				System.out.println("Data inserted successfully!");
+			}
+
+		} catch (SQLException ex) {
+			System.out.println("Error inserting data: " + ex);
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				System.out.println("Error closing statement: " + e);
+			}
+		}
+	}
+
+	// Registration for Candidates
+	public static void registerCandidates(String candidateID, String name, int age, String gender, String password,
+			int aadharCard) {
+
+		try {
+			// Assuming the table has columns: id (auto-incremented), voterName, voterAge,
+			// voterAddress
+			String sql = "INSERT INTO Candidates (candidateID, name, age, gender, password, aadharCard) VALUES (?, ?, ?, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
 
 			// Set values for the placeholders
@@ -52,6 +89,7 @@ public class DatabaseOperation {
 			pstmt.setInt(3, age);
 			pstmt.setString(4, gender);
 			pstmt.setString(5, password);
+			pstmt.setInt(6, aadharCard);
 
 			// Execute the insert command
 			int rowsAffected = pstmt.executeUpdate();
@@ -85,11 +123,23 @@ public class DatabaseOperation {
 		} catch (SQLException ex) {
 			System.out.println(ex);
 		}
+
+		try {
+			pstmt = con.prepareStatement("Select password from Voters where voterID=?");
+			pstmt.setString(1, Username);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				if (rs.getString("password").equals(Password)) {
+					return true;
+				}
+			}
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
 		return false;
+
 	}
-	
-
 }
-
 
 // one mistake i had done in logic, so afterwards i will do same above functionality part i Voters table with sql
