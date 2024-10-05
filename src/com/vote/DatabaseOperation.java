@@ -140,6 +140,17 @@ public class DatabaseOperation {
 		return false;
 
 	}
+
+	public static ResultSet getCandidateNames() {
+		try {
+			pstmt = con.prepareStatement("Select name from Candidates");
+			rs = pstmt.executeQuery();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return rs;
+	}
 }
 
 // one mistake i had done in logic, so afterwards i will do same above functionality part i Voters table with sql
