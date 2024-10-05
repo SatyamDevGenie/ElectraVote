@@ -10,7 +10,7 @@ public class LoginPage extends Frame {
     void VotingAppLogin() {
         // Frame properties
         setTitle("User Login");
-        setSize(400, 500);
+        setSize(600, 630);
         setLayout(new GridBagLayout());
         
      // Center the frame on the screen
@@ -27,7 +27,7 @@ public class LoginPage extends Frame {
         // Panel for form elements (Username and Password fields)
         Panel formPanel = new Panel(new GridBagLayout());
         formPanel.setBackground(Color.WHITE);
-        formPanel.setPreferredSize(new Dimension(350, 300));
+        formPanel.setPreferredSize(new Dimension(600, 500));
         formPanel.setLayout(new GridBagLayout());
         formPanel.setBounds(30, 40, 280, 200);
         
@@ -37,7 +37,7 @@ public class LoginPage extends Frame {
 
         // Heading Label
         Label headingLabel = new Label("Voter's Login", Label.CENTER);
-        headingLabel.setFont(new Font("Segoe UI", Font.BOLD, 22)); // Modern font
+        headingLabel.setFont(new Font("Segoe UI", Font.BOLD, 25)); // Modern font
         headingLabel.setForeground(new Color(52, 73, 94)); // Darker font color
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -60,11 +60,11 @@ public class LoginPage extends Frame {
         usernameField = new TextField(20); // Set 20 columns for width
         usernameField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         usernameField.setForeground(new Color(127, 140, 141)); // Gray font for placeholder
-        usernameField.setText("Enter your Candidate ID here...");
+        usernameField.setText("Enter your ID here...");
         usernameField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (usernameField.getText().equals("Enter your Candidate ID here...")) {
+                if (usernameField.getText().equals("Enter your ID here")) {
                     usernameField.setText("");
                     usernameField.setForeground(Color.BLACK);
                 }
@@ -73,7 +73,7 @@ public class LoginPage extends Frame {
             @Override
             public void focusLost(FocusEvent e) {
                 if (usernameField.getText().isEmpty()) {
-                    usernameField.setText("Enter your Candidate ID here...");
+                    usernameField.setText("Enter your ID here...");
                     usernameField.setForeground(new Color(127, 140, 141)); // Gray placeholder text
                 }
             }

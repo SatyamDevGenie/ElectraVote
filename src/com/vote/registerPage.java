@@ -13,7 +13,7 @@ public class registerPage extends Frame {
 	void VotingAppRegister() {
 		// Frame properties
 		setTitle("User Registration");
-		setSize(450, 600); // Increased height to accommodate new elements
+		setSize(600, 630); // Increased height to accommodate new elements
 		setLayout(new GridBagLayout()); // Use GridBagLayout for better control
 
 		// Center the frame on the screen
@@ -28,8 +28,8 @@ public class registerPage extends Frame {
 		setBackground(new Color(245, 245, 245)); // Subtle light gray background
 
 		// Heading Label
-		Label headingLabel = new Label("Registration Form", Label.CENTER);
-		headingLabel.setFont(new Font("Segoe UI", Font.BOLD, 24)); // Modern, professional font
+		Label headingLabel = new Label("Create your Account", Label.CENTER);
+		headingLabel.setFont(new Font("Segoe UI", Font.BOLD, 25)); // Modern, professional font
 		headingLabel.setForeground(new Color(52, 73, 94)); // Darker font color for better contrast
 		gbc.gridx = 0;
 		gbc.gridy = 0;

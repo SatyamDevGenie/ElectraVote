@@ -16,8 +16,8 @@ public class homePage extends Frame implements ActionListener {
 
     public homePage() {
         // Frame properties
-        setTitle("Voting Application");
-        setSize(500, 600);
+        setTitle("Voting Dashboard");
+        setSize(600, 630);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Padding around components
@@ -27,8 +27,8 @@ public class homePage extends Frame implements ActionListener {
         setBackground(new Color(240, 240, 240)); // Light grey background
 
         // Add a title label with styling
-        lblTitle = new Label("Welcome to ElectraVote Platform");
-        lblTitle.setFont(new Font("Helvetica", Font.BOLD, 22));
+        lblTitle = new Label("ElectraVote Platform");
+        lblTitle.setFont(new Font("Helvetica", Font.BOLD, 30));
         lblTitle.setForeground(new Color(50, 50, 50));
         lblTitle.setAlignment(Label.CENTER);
         gbc.gridx = 0;
@@ -38,8 +38,8 @@ public class homePage extends Frame implements ActionListener {
         add(lblTitle, gbc);
 
         // Candidate List Label with enhanced styling
-        lblCandidateList = new Label("Please Select Your Candidate:");
-        lblCandidateList.setFont(new Font("Helvetica", Font.BOLD, 16));
+        lblCandidateList = new Label("Please Select Your Candidate :-");
+        lblCandidateList.setFont(new Font("Helvetica", Font.BOLD, 15));
         lblCandidateList.setForeground(new Color(35, 35, 35));
         gbc.gridx = 0;
         gbc.gridy = 1;
