@@ -138,8 +138,10 @@ public class LoginPage extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DatabaseOperation.loadJDBCDriverAndCreateConnection();
-                if (DatabaseOperation.loginCandidate(usernameField.getText(), passwordField.getText())) {
-                    homePage homeObj = new homePage();
+                if (DatabaseOperation.loginCandidate(usernameField.getText(), passwordField.getText()) != null) {
+                	
+                    String candidateName = DatabaseOperation.loginCandidate(usernameField.getText(), passwordField.getText());
+					CandidateDashboard canObj = new CandidateDashboard(candidateName , null);
                     dispose();
                 } else {
                     showErrorDialog("Your Username and Password is incorrect.");

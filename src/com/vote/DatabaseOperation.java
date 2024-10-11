@@ -145,34 +145,52 @@ public class DatabaseOperation {
     }
 
 	// Login Method
-	public static boolean loginCandidate(String Username, String Password) {
-		try {
-			pstmt = con.prepareStatement("Select password from Candidates where candidateID=?");
-			pstmt.setString(1, Username);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				if (rs.getString("password").equals(Password)) {
-					return true;
-				}
-			}
-		} catch (SQLException ex) {
-			System.out.println(ex);
-		}
+	public static String loginCandidate(String Username, String Password) {
+		 try {
+		        // Query to check the password for the given candidateID (Username)
+		        String sql = "SELECT name, password FROM Candidates WHERE candidateID = ?";
+		        pstmt = con.prepareStatement(sql);
+		        pstmt.setString(1, Username);
+		        rs = pstmt.executeQuery();
 
-		try {
-			pstmt = con.prepareStatement("Select password from Voters where voterID=?");
-			pstmt.setString(1, Username);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				if (rs.getString("password").equals(Password)) {
-					return true;
-				}
-			}
+		        // Check if the result set has the candidate's details
+		        if (rs.next()) {
+		            // Validate the password
+		            if (rs.getString("password").equals(Password)) {
+		                String candidateName = rs.getString("name"); // Retrieve the candidate name
+		                return candidateName; // Return the candidateName if login is successful
+		            } else {
+		                System.out.println("Invalid password.");
+		            }
+		        } else {
+		            System.out.println("Candidate not found.");
+		        }
+		    } catch (SQLException ex) {
+		        System.out.println("Error during login: " + ex);
+		    } finally {
+		        try {
+		            if (rs != null) rs.close();
+		            if (pstmt != null) pstmt.close();
+		        } catch (SQLException e) {
+		            System.out.println("Error closing resources: " + e);
+		        }
+		    }
+		    return null; // Return null if login failed
 
-		} catch (SQLException ex) {
-			System.out.println(ex);
-		}
-		return false;
+//		try {
+//			pstmt = con.prepareStatement("Select password from Voters where voterID=?");
+//			pstmt.setString(1, Username);
+//			rs = pstmt.executeQuery();
+//			if (rs.next()) {
+//				if (rs.getString("password").equals(Password)) {
+//					return true;
+//				}
+//			}
+//
+//		} catch (SQLException ex) {
+//			System.out.println(ex);
+//		}
+//		return false;
 
 	}
 
