@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class DatabaseOperation {
 
 	static PreparedStatement pstmt;
@@ -38,76 +40,109 @@ public class DatabaseOperation {
 	// insert data in table
 	// method name ( values )
 
-	public static void registerVoters(String voterID, String name, int age, String gender, String password,
-			int aadharCard) {
+	public static boolean registerVoters(String voterID, String name, int age, String gender, String password, int aadharCard) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean isInserted = false;  // To track if data is inserted
 
-		try {
-			// Assuming the table has columns: id (auto-incremented), voterName, voterAge,
-			// voterAddress
-			String sql = "INSERT INTO Voters (voterID, name, age, gender, password, aadharCard) VALUES (?, ?, ?, ?, ?, ?)";
-			pstmt = con.prepareStatement(sql);
+        try {
+            // Query to check if the aadharCard already exists in the Voters table
+            String checkQuery = "SELECT aadharCard FROM Voters WHERE aadharCard = ?";
+            pstmt = con.prepareStatement(checkQuery);
+            pstmt.setInt(1, aadharCard);
+            rs = pstmt.executeQuery();
 
-			// Set values for the placeholders
-			pstmt.setString(1, voterID);
-			pstmt.setString(2, name);
-			pstmt.setInt(3, age);
-			pstmt.setString(4, gender);
-			pstmt.setString(5, password);
-			pstmt.setInt(6, aadharCard);
+            // If a record is found, the aadharCard already exists, so don't insert
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Aadhar card already exists. No new voter will be inserted.", "Duplicate Aadhar", JOptionPane.WARNING_MESSAGE);
+                return false;  // Return false since no data was inserted
+            } else {
+                // Proceed with the insertion since the aadharCard does not exist
+                String insertQuery = "INSERT INTO Voters (voterID, name, age, gender, password, aadharCard) VALUES (?, ?, ?, ?, ?, ?)";
+                pstmt = con.prepareStatement(insertQuery);
 
-			// Execute the insert command
-			int rowsAffected = pstmt.executeUpdate();
-			if (rowsAffected > 0) {
-				System.out.println("Data inserted successfully!");
-			}
+                // Set values for the placeholders
+                pstmt.setString(1, voterID);
+                pstmt.setString(2, name);
+                pstmt.setInt(3, age);
+                pstmt.setString(4, gender);
+                pstmt.setString(5, password);
+                pstmt.setInt(6, aadharCard);
 
-		} catch (SQLException ex) {
-			System.out.println("Error inserting data: " + ex);
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-			} catch (SQLException e) {
-				System.out.println("Error closing statement: " + e);
-			}
-		}
-	}
+                // Execute the insert command
+                int rowsAffected = pstmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(null, "Data inserted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    isInserted = true;  // Mark as true since data was inserted
+                }
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error during database operation: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        return isInserted;  // Return the result of insertion
+    }
+
 
 	// Registration for Candidates
-	public static void registerCandidates(String candidateID, String name, int age, String gender, String password,
-			int aadharCard) {
+	public static boolean registerCandidates(String candidateID, String name, int age, String gender, String password, int aadharCard) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean isInserted = false;  // To track if data is inserted
 
-		try {
-			// Assuming the table has columns: id (auto-incremented), voterName, voterAge,
-			// voterAddress
-			String sql = "INSERT INTO Candidates (candidateID, name, age, gender, password, aadharCard) VALUES (?, ?, ?, ?, ?, ?)";
-			pstmt = con.prepareStatement(sql);
+        try {
+            // Query to check if the aadharCard already exists in the Voters table
+            String checkQuery = "SELECT aadharCard FROM Candidates WHERE aadharCard = ?";
+            pstmt = con.prepareStatement(checkQuery);
+            pstmt.setInt(1, aadharCard);
+            rs = pstmt.executeQuery();
 
-			// Set values for the placeholders
-			pstmt.setString(1, candidateID);
-			pstmt.setString(2, name);
-			pstmt.setInt(3, age);
-			pstmt.setString(4, gender);
-			pstmt.setString(5, password);
-			pstmt.setInt(6, aadharCard);
+            // If a record is found, the aadharCard already exists, so don't insert
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Aadhar card already exists. No new voter will be inserted.", "Duplicate Aadhar", JOptionPane.WARNING_MESSAGE);
+                return false;  // Return false since no data was inserted
+            } else {
+                // Proceed with the insertion since the aadharCard does not exist
+                String insertQuery = "INSERT INTO Candidates (candidateID, name, age, gender, password, aadharCard) VALUES (?, ?, ?, ?, ?, ?)";
+                pstmt = con.prepareStatement(insertQuery);
 
-			// Execute the insert command
-			int rowsAffected = pstmt.executeUpdate();
-			if (rowsAffected > 0) {
-				System.out.println("Data inserted successfully!");
-			}
+                // Set values for the placeholders
+                pstmt.setString(1, candidateID);
+                pstmt.setString(2, name);
+                pstmt.setInt(3, age);
+                pstmt.setString(4, gender);
+                pstmt.setString(5, password);
+                pstmt.setInt(6, aadharCard);
 
-		} catch (SQLException ex) {
-			System.out.println("Error inserting data: " + ex);
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-			} catch (SQLException e) {
-				System.out.println("Error closing statement: " + e);
-			}
-		}
-	}
+                // Execute the insert command
+                int rowsAffected = pstmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(null, "Data inserted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    isInserted = true;  // Mark as true since data was inserted
+                }
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error during database operation: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        return isInserted;  // Return the result of insertion
+    }
 
 	// Login Method
 	public static boolean loginCandidate(String Username, String Password) {

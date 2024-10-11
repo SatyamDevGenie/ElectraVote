@@ -36,7 +36,6 @@ public class registerPage extends Frame {
 		gbc.gridwidth = 2;
 		add(headingLabel, gbc);
 
-
 		// Terms and conditions checkbox and Newsletter subscription checkbox in a Panel
 		Panel checkboxPanel = new Panel(new GridBagLayout());
 		GridBagConstraints checkGbc = new GridBagConstraints();
@@ -170,10 +169,14 @@ public class registerPage extends Frame {
 					int aadharNo = Integer.parseInt(aadharField.getText());
 
 					DatabaseOperation.loadJDBCDriverAndCreateConnection();
-					DatabaseOperation.registerVoters(voterID, name, age, gender, password, aadharNo);
-
+					if (DatabaseOperation.registerVoters(voterID, name, age, gender, password, aadharNo) == true)
 					// Display dialog with Candidate ID
-					showVoterIDDialog(voterID);
+					{
+						showVoterIDDialog(voterID);
+						dispose();
+						LoginPage obj = new LoginPage();
+						obj.VotingAppLogin();
+					}
 				} else if (registerGrp.getSelectedCheckbox().getLabel().equals("Candidate")) {
 					String name = nameField.getText();
 					String gender = genderChoice.getSelectedItem();
@@ -183,10 +186,15 @@ public class registerPage extends Frame {
 					int aadharNo = Integer.parseInt(aadharField.getText());
 
 					DatabaseOperation.loadJDBCDriverAndCreateConnection();
-					DatabaseOperation.registerCandidates(candidateID, name, age, gender, password, aadharNo);
+					if (DatabaseOperation.registerCandidates(candidateID, name, age, gender, password,
+							aadharNo) == true) {
 
-					// Display dialog with Candidate ID
-					showCandidateIDDialog(candidateID);
+						// Display dialog with Candidate ID
+						showVoterIDDialog(candidateID);
+						dispose();
+						LoginPage obj = new LoginPage();
+						obj.VotingAppLogin();
+					}
 				} else {
 					showErrorDialog("Please Select checkbox...");
 				}
