@@ -205,5 +205,3 @@ public class DatabaseOperation {
 		return rs;
 	}
 }
-
-// one mistake i had done in logic, so afterwards i will do same above functionality part i Voters table with sql
